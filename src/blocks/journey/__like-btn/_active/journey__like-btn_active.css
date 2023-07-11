@@ -1,0 +1,20 @@
+@keyframes heartBeat {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.2);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.journey__like-btn_active {
+  background-image: url('../../../../images/like-icon_active.svg');
+  animation: heartBeat .4s ease-in-out;
+}
+
+.journey__like-btn_active:hover {
+  opacity: 1;
+}
