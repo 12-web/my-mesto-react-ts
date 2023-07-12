@@ -1,14 +1,11 @@
 import { ReactElement, FC, useRef, useContext, FormEvent } from 'react';
 import PopupWithForm from './PopupWithForm';
 import { CurrentUserContext } from '../contexts/CurrentUserContext';
-import { User } from '../typings/types';
+import { PopupWithFormType, User } from '../typings/types';
 
-type EditAvatarPopupProps = {
-  isOpen: boolean;
-  onClose: () => void;
+interface EditAvatarPopupProps extends PopupWithFormType {
   onUpdateAvatar: (avatar: string) => void;
-  isFormLoading: boolean;
-};
+}
 
 const EditAvatarPopup: FC<EditAvatarPopupProps> = ({
   isOpen,

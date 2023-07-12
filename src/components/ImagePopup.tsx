@@ -1,9 +1,9 @@
 import { FC, ReactElement } from 'react';
 
-type ImagePopupProps = {
+interface ImagePopupProps {
   card: { name: string; link: string };
   onClose: () => void;
-};
+}
 
 const ImagePopup: FC<ImagePopupProps> = ({ card, onClose }): ReactElement => {
   return (

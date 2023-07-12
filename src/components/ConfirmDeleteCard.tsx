@@ -1,13 +1,11 @@
 import PopupWithForm from './PopupWithForm';
 import { FC, FormEvent, ReactElement } from 'react';
+import { PopupWithFormType } from '../typings/types';
 
-type ConfirmDeleteCardProps = {
-  isOpen: boolean;
-  onClose: () => void;
-  isFormLoading: boolean;
+interface ConfirmDeleteCardProps extends PopupWithFormType {
   onConfirmDelete: (cardId: string) => void;
   cardId: string;
-};
+}
 
 const ConfirmDeleteCard: FC<ConfirmDeleteCardProps> = ({
   isOpen,

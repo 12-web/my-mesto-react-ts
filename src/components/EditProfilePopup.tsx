@@ -9,14 +9,11 @@ import {
 } from 'react';
 import PopupWithForm from './PopupWithForm';
 import { CurrentUserContext } from '../contexts/CurrentUserContext';
-import { User } from '../typings/types';
+import { User, PopupWithFormType } from '../typings/types';
 
-type EditProfilePopupProps = {
-  isOpen: boolean;
-  onClose: () => void;
-  isFormLoading: boolean;
+interface EditProfilePopupProps extends PopupWithFormType {
   onUpdateUser: (userData: User) => void;
-};
+}
 
 const EditProfilePopup: FC<EditProfilePopupProps> = ({
   isOpen,

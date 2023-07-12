@@ -6,14 +6,12 @@ import {
   useEffect,
   useState,
 } from 'react';
+import { PopupWithFormType } from '../typings/types';
 import PopupWithForm from './PopupWithForm';
 
-type AddPlacePopupProps = {
-  onClose: () => void;
-  isOpen: boolean;
+interface AddPlacePopupProps extends PopupWithFormType {
   onAddPlace: (card: { link: string; title: string }) => void;
-  isFormLoading: boolean;
-};
+}
 
 const AddPlacePopup: FC<AddPlacePopupProps> = ({
   onClose,
