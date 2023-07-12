@@ -22,17 +22,17 @@ const Card: FC<CardProps> = ({
   /**
    * функция нажатия на карточку с открытием попапа просмотра карточки
    */
-  const handleCardClick = () => onCardClick(card);
+  const handleCardClick = (): void => onCardClick(card);
 
   /**
    * функция нажатия на кнопку лайка
    */
-  const handleLikeClick = () => onCardLike(card);
+  const handleLikeClick = (): void => onCardLike(card);
 
   /**
    * функция нажатия на кнопку удаления
    */
-  const handleDeleteClick = () => onCardDelete(card._id);
+  const handleDeleteClick = (): void => onCardDelete(card._id);
 
   return (
     <li className='journey__item'>

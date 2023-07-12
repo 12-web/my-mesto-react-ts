@@ -10,27 +10,39 @@ import EditAvatarPopup from './EditAvatarPopup';
 import AddPlacePopup from './AddPlacePopup';
 import ConfirmDeleteCard from './ConfirmDeleteCard';
 import MainLoader from './MainLoader';
-import { CardType } from '../typings/types';
+import { CardType, User } from '../typings/types';
 
 import '../index.css';
 
 const App = () => {
-  const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = useState(false);
-  const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = useState(false);
-  const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = useState(false);
-  const [isDeleteCardPopupOpen, setIsDeleteCardPopupOpen] = useState(false);
-  const [selectedCard, setSelectedCard] = useState({ name: '', link: '' });
-  const [selectedDeleteCardId, setSelectedDeleteCardId] = useState('');
+  const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] =
+    useState<boolean>(false);
+  const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] =
+    useState<boolean>(false);
+  const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] =
+    useState<boolean>(false);
+  const [isDeleteCardPopupOpen, setIsDeleteCardPopupOpen] =
+    useState<boolean>(false);
+  const [selectedCard, setSelectedCard] = useState<{
+    name: string;
+    link: string;
+  }>({ name: '', link: '' });
+  const [selectedDeleteCardId, setSelectedDeleteCardId] = useState<string>('');
   const [cards, setCards] = useState<Array<CardType>>([]);
-  const [isPageLoading, setIsPageLoading] = useState(false);
-  const [isFormLoading, setFormIsLoading] = useState(false);
-  const [currentUser, setCurrentUser] = useState({
+  const [isPageLoading, setIsPageLoading] = useState<boolean>(false);
+  const [isFormLoading, setFormIsLoading] = useState<boolean>(false);
+  const [currentUser, setCurrentUser] = useState<User>({
     name: '',
     about: '',
     avatar: '',
     _id: '',
   });
-  const getPageInfo = async () => {
+
+  /**
+   * функция получения данных для страницы (данные пользователя и карточки)
+   */
+
+  const getPageInfo = async (): Promise<void> => {
     setIsPageLoading(true);
     try {
       const userData: {
@@ -55,7 +67,7 @@ const App = () => {
   }, []);
 
   /**
-   * фукнция добавления новой картчочки
+   * функция добавления новой картчочки
    * @param {string} name - название карточки
    * @param {string} link - ссылка на картинку карточки
    */
@@ -66,10 +78,10 @@ const App = () => {
   }: {
     link: string;
     title: string;
-  }) => {
+  }): Promise<void> => {
     setFormIsLoading(true);
     try {
-      const newCard: never = await api.addNewCard(name, link);
+      const newCard: CardType = await api.addNewCard(name, link);
       setCards([newCard, ...cards]);
       closeAllPopups();
     } catch (error) {
@@ -90,11 +102,11 @@ const App = () => {
   }: {
     name: string;
     about: string;
-  }) => {
+  }): Promise<void> => {
     setFormIsLoading(true);
     try {
-      const res: never = await api.editProfileData(name, about);
-      setCurrentUser(res);
+      const userData: User = await api.editProfileData(name, about);
+      setCurrentUser(userData);
       closeAllPopups();
     } catch (error) {
       console.error(error);
@@ -107,11 +119,11 @@ const App = () => {
    * изменение аватара и закрытие модального окна
    * @param {string} avatar - ссылка на картинку (аватар пользователя)
    */
-  const handleUpdateAvatar = async (avatar: string) => {
+  const handleUpdateAvatar = async (avatar: string): Promise<void> => {
     setFormIsLoading(true);
     try {
-      const res: never = await api.editUserAvatar(avatar);
-      setCurrentUser(res);
+      const userData: User = await api.editUserAvatar(avatar);
+      setCurrentUser(userData);
       closeAllPopups();
     } catch (error) {
       console.error(error);
@@ -125,7 +137,7 @@ const App = () => {
    * @param {Array} card.likes - массив лайков карточки
    * @param {string} card._id - идентификатор карточки
    */
-  const handleCardLike = async (card: CardType) => {
+  const handleCardLike = async (card: CardType): Promise<void> => {
     const isLiked = card.likes.some(i => i._id === currentUser._id);
     try {
       const newCard = await api.changeLikeCardStatus<CardType>(
@@ -144,23 +156,23 @@ const App = () => {
   /**
    * открытие попапа редактирования аватара
    */
-  const handleEditAvatarClick = () => setIsEditAvatarPopupOpen(true);
+  const handleEditAvatarClick = (): void => setIsEditAvatarPopupOpen(true);
 
   /**
    * открытие попапа редактирования профиля
    */
-  const handleEditProfileClick = () => setIsEditProfilePopupOpen(true);
+  const handleEditProfileClick = (): void => setIsEditProfilePopupOpen(true);
 
   /**
    * открытие попапа редактирования профиля
    */
-  const handleAddPlaceClick = () => setIsAddPlacePopupOpen(true);
+  const handleAddPlaceClick = (): void => setIsAddPlacePopupOpen(true);
 
   /**
    * открытие модального окна подтверждения удаления карточки
    * @param {string} id
    */
-  const handleCardDeleteClick = (id: string) => {
+  const handleCardDeleteClick = (id: string): void => {
     setIsDeleteCardPopupOpen(true);
     setSelectedDeleteCardId(id);
   };
@@ -169,7 +181,7 @@ const App = () => {
    * удаление карточки и закрытие модального окна
    * @param {string} id - идентификатор карточки
    */
-  const handleCardDelete = async (id: string) => {
+  const handleCardDelete = async (id: string): Promise<void> => {
     setFormIsLoading(true);
     try {
       await api.deleteCard(id);
@@ -185,7 +197,7 @@ const App = () => {
   /**
    * функция закрытия всех модальных окон и обнуление значения выбранной карточки
    */
-  const closeAllPopups = () => {
+  const closeAllPopups = (): void => {
     setIsEditProfilePopupOpen(false);
     setIsAddPlacePopupOpen(false);
     setIsEditAvatarPopupOpen(false);
@@ -198,7 +210,7 @@ const App = () => {
    * @param {string} name - имя карточки
    * @param {string} link - ссылка на картинку карточки
    */
-  const handleCardClick = ({ name, link }: CardType) =>
+  const handleCardClick = ({ name, link }: CardType): void =>
     setSelectedCard({ name: name, link: link });
 
   return (

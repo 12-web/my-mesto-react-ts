@@ -3,7 +3,7 @@ import Card from './Card';
 import { CurrentUserContext } from '../contexts/CurrentUserContext';
 import { CardType } from '../typings/types';
 
-type ManeProps = {
+type MainProps = {
   onEditAvatar: () => void;
   onEditProfile: () => void;
   onAddPlace: () => void;
@@ -13,7 +13,7 @@ type ManeProps = {
   cards: Array<CardType>;
 };
 
-const Main: FC<ManeProps> = ({
+const Main: FC<MainProps> = ({
   onEditAvatar,
   onEditProfile,
   onAddPlace,

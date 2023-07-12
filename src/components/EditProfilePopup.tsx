@@ -41,7 +41,7 @@ const EditProfilePopup: FC<EditProfilePopupProps> = ({
   /**
    * функция отправки формы при которой обновляются данные в профиле
    */
-  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+  const handleSubmit = (e: FormEvent<HTMLFormElement>): void => {
     e.preventDefault();
     onUpdateUser(userData);
   };
@@ -49,7 +49,7 @@ const EditProfilePopup: FC<EditProfilePopupProps> = ({
   /**
    * функция получения данных из формы
    */
-  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+  const handleChange = (e: ChangeEvent<HTMLInputElement>): void => {
     setUserData({
       ...userData,
       [e.target.name]: e.target.value,
