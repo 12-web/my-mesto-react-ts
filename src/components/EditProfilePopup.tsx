@@ -21,19 +21,19 @@ const EditProfilePopup: FC<EditProfilePopupProps> = ({
   onUpdateUser,
   isFormLoading,
 }): ReactElement => {
-  const [userData, setUserData] = useState({ name: '', about: '' });
+  const [userData, setUserData] = useState<User>({ name: '', about: '' });
 
-  const currentUser = useContext<User>(CurrentUserContext);
+  const { name, about } = useContext<User>(CurrentUserContext);
 
   /**
    * добавление данных пользователя при загрузке страницы
    */
   useEffect(() => {
     setUserData({
-      name: currentUser.name,
-      about: currentUser.about,
+      name: name,
+      about: about,
     });
-  }, [currentUser, isOpen]);
+  }, [name, about, isOpen]);
 
   /**
    * функция отправки формы при которой обновляются данные в профиле

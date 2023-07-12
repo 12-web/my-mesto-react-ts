@@ -1,7 +1,7 @@
 import { FC, ReactElement, useContext } from 'react';
 import Card from './Card';
 import { CurrentUserContext } from '../contexts/CurrentUserContext';
-import { CardType } from '../typings/types';
+import { CardType, User } from '../typings/types';
 
 type MainProps = {
   onEditAvatar: () => void;
@@ -22,7 +22,7 @@ const Main: FC<MainProps> = ({
   onCardDelete,
   cards,
 }): ReactElement => {
-  const { name, about, avatar } = useContext(CurrentUserContext);
+  const { name, about, avatar } = useContext<User>(CurrentUserContext);
 
   return (
     <main className='content'>

@@ -19,7 +19,10 @@ const AddPlacePopup: FC<AddPlacePopupProps> = ({
   onAddPlace,
   isFormLoading,
 }): ReactElement => {
-  const [cardData, setCardData] = useState({ title: '', link: '' });
+  const [cardData, setCardData] = useState<{ title: string; link: string }>({
+    title: '',
+    link: '',
+  });
 
   /** создание новой карточки */
   const handleSubmit = (e: FormEvent<HTMLFormElement>): void => {

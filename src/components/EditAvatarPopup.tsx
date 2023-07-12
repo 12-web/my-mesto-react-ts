@@ -13,13 +13,13 @@ const EditAvatarPopup: FC<EditAvatarPopupProps> = ({
   onUpdateAvatar,
   isFormLoading,
 }): ReactElement => {
-  const userAvatar = useContext<User>(CurrentUserContext);
-  const avatar = useRef<HTMLInputElement>(null!);
+  const { avatar } = useContext<User>(CurrentUserContext);
+  const avatarInput = useRef<HTMLInputElement>(null!);
 
   /** изменение аватара пользователя */
   const handleSubmit = (e: FormEvent<HTMLFormElement>): void => {
     e.preventDefault();
-    onUpdateAvatar(avatar.current.value);
+    onUpdateAvatar(avatarInput.current.value);
   };
 
   return (
@@ -32,8 +32,8 @@ const EditAvatarPopup: FC<EditAvatarPopupProps> = ({
       buttonText={isFormLoading ? 'Сохранение...' : 'Сохранить'}
     >
       <input
-        ref={avatar}
-        defaultValue={userAvatar.avatar}
+        ref={avatarInput}
+        defaultValue={avatar}
         className='popup__input popup__input_value_avatar'
         id='avatar'
         type='url'
