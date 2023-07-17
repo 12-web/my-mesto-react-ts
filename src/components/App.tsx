@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
-import Header from './Header';
-import Footer from './Footer';
+import Header from './Header/Header';
+import Footer from './Footer/Footer';
 import Main from './Main';
 import ImagePopup from './ImagePopup';
 import api from '../utils/api';
@@ -9,7 +9,7 @@ import EditProfilePopup from './EditProfilePopup';
 import EditAvatarPopup from './EditAvatarPopup';
 import AddPlacePopup from './AddPlacePopup';
 import ConfirmDeleteCard from './ConfirmDeleteCard';
-import MainLoader from './MainLoader';
+import MainLoader from './MainLoader/MainLoader';
 import { CardType, User } from '../typings/types';
 
 import '../index.css';
@@ -217,7 +217,7 @@ const App = () => {
     <div className='root'>
       <CurrentUserContext.Provider value={currentUser}>
         <Header />
-        {isPageLoading ? (
+        {!isPageLoading ? (
           <MainLoader />
         ) : (
           <Main

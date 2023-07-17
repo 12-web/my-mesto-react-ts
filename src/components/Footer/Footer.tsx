@@ -1,4 +1,5 @@
 import { useState, useEffect, FC, ReactElement } from 'react';
+import styles from './Footer.module.scss';
 
 const Footer: FC = (): ReactElement => {
   const [currentYear, setCurrentYear] = useState(0);
@@ -10,8 +11,8 @@ const Footer: FC = (): ReactElement => {
   }, []);
 
   return (
-    <footer className='footer'>
-      <p className='footer__copyright'>© {currentYear} Mesto Russia</p>
+    <footer className={styles.footer}>
+      <p className={styles.copyright}>© {currentYear} Mesto Russia</p>
     </footer>
   );
 };
