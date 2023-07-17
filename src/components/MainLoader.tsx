@@ -1,5 +1,5 @@
 import { FC, ReactElement } from 'react';
-import './MainLoader.css';
+import './MainLoader.scss';
 
 const Loader: FC = (): ReactElement => {
   return (
