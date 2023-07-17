@@ -217,7 +217,7 @@ const App = () => {
     <div className='root'>
       <CurrentUserContext.Provider value={currentUser}>
         <Header />
-        {!isPageLoading ? (
+        {isPageLoading ? (
           <MainLoader />
         ) : (
           <Main
